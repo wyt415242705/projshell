@@ -9,7 +9,7 @@
 #include <sys/wait.h>  
 #include "Phase2.h"  
   
-#define DEBUG 1  
+#define DEBUG 0
   
 #define BUFSIZE 1024  
 #define CMDNUMBER 100  
@@ -124,10 +124,11 @@ int read_char(char *str)
 char *shell_prompt(char *promptbuf)  
 {  
     char tmpbuf[BUFSIZE + 1];  
+    char tempbuf[BUFSIZE +1];
   
     //void *memset(void *s, int c, size_t n);  
     memset(promptbuf, 0, BUFSIZE + 1);  
-    memset(tmpbuf, 0, sizeof(tmpbuf));  
+    memset(tmpbuf, 0, sizeof(tmpbuf)); 
   
     //char *getcwd(char *buf, size_t size);  
     if(getcwd(tmpbuf, sizeof(tmpbuf) - 1) == NULL){  
@@ -136,8 +137,10 @@ char *shell_prompt(char *promptbuf)
         exit(1);  
     }  
       
-    //int snprintf(char *str, size_t size, const char *format, ...);  
-    snprintf(promptbuf, BUFSIZE, "%s$ ", tmpbuf);  
+    //int snprintf(char *str, size_t size, const char *format, ...);
+    printf("%s", "[OS shell ");
+    snprintf(promptbuf, BUFSIZE, "%s ]$ ", tmpbuf);
+    //printf("%s", "]$ ");  
   
     return promptbuf;  
 }  
